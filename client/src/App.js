@@ -15,6 +15,8 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 const Login = React.lazy(() => import("./pages/login/Login"));
 const Register = React.lazy(() => import("./pages/register/Register"));
 const Home = React.lazy(() => import("./pages/home/Home"));
+const Userinfo = React.lazy(() => import("./pages/Userinfo/userinfo"));
+
 
 const theme = createTheme({
   palette: palette.light,
@@ -36,6 +38,14 @@ const router = createBrowserRouter([
       <ProtectedRoute allowedRoles={["user"]}>
         <Home />
       </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/userinfo",
+    element: (
+     // <ProtectedRoute allowedRoles={["admin"]}>
+        <Userinfo />
+     // </ProtectedRoute>
     ),
   },
 ]);

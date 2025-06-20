@@ -102,4 +102,16 @@ if (deletedCount === 0) {
   }
 });
 
+router.get("/", async (req, res) => {
+  try {
+    const users = await Users.findAll({
+      attributes: { exclude: ["password"] }, // exclude the password field
+    });
+    res.status(200).json(users);
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).json({ message: "Error fetching users", error });
+  }
+});
+
 module.exports = router;
