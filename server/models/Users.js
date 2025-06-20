@@ -10,19 +10,29 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true, 
+    },
+   
     password: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    location: {
-      type: DataTypes.STRING,
+    role: {
+       type: DataTypes.ENUM("admin", "user"), 
       allowNull: false,
+      defaultValue: "user",
     },
-    weather_data: {
-      type: DataTypes.JSON,
-      allowNull: false,
-      defaultValue: {}, 
-    },
+   
   });
+  
+  Users.associate = (models) => {
+    Users.hasMany(models.WeatherData, {
+      foreignKey: "userId",
+      onDelete: "CASCADE"
+    });
+  };
     return Users;
 };
